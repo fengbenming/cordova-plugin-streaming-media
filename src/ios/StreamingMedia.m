@@ -110,7 +110,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 -(void)stopAudio:(CDVInvokedUrlCommand *) command {
     // [self stop:command type:[NSString stringWithString:TYPE_AUDIO]];
-    [self cleanup]
+    [self cleanup];
 }
 
 // Ignore the mute button

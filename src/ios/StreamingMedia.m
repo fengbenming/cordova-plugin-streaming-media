@@ -109,7 +109,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 -(void)stopAudio:(CDVInvokedUrlCommand *) command {
-    [self stop:command type:[NSString stringWithString:TYPE_AUDIO]];
+    // [self stop:command type:[NSString stringWithString:TYPE_AUDIO]];
+    [self cleanup]
 }
 
 // Ignore the mute button
@@ -216,12 +217,16 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [moviePlayer setShowsPlaybackControls:YES];
     [moviePlayer setUpdatesNowPlayingInfoCenter:YES];
     
-    if(@available(iOS 11.0, *)) { [moviePlayer setEntersFullScreenWhenPlaybackBegins:YES]; }
+    if(@available(iOS 11.0, *)) { [moviePlayer setEntersFullScreenWhenPlaybackBegins:false]; }
     
+    [moviePlayer.player play];
+    moviePlayer.view.frame = CGRectMake(0, 60, self.webView.bounds.size.width, self.webView.bounds.size.width*9/16);
+    [self.viewController.view addSubview:moviePlayer.view];
+
     // present modally so we get a close button
-    [self.viewController presentViewController:moviePlayer animated:YES completion:^(void){
-        [moviePlayer.player play];
-    }];
+    // [self.viewController presentViewController:moviePlayer animated:YES completion:^(void){
+    //     [moviePlayer.player play];
+    // }];
     
     // add audio image and background color
     if ([videoType isEqualToString:TYPE_AUDIO]) {
@@ -392,6 +397,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     if (moviePlayer) {
         [moviePlayer.player pause];
         [moviePlayer dismissViewControllerAnimated:YES completion:nil];
+        [moviePlayer.view removeFromSuperview];
         moviePlayer = nil;
     }
 }

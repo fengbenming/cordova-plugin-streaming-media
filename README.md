@@ -1,7 +1,7 @@
 # Cordova Streaming Media plugin
 
-For iOS and Android, by [Nicholas Hutchind](https://github.com/nchutchind)
-去掉默认全屏的播放模式，修改为可设置播放窗口大小的播放模式
+* For iOS and Android, by [Nicholas Hutchind](https://github.com/nchutchind)
+* 去掉默认全屏的播放模式，修改为可设置播放窗口大小的播放模式
 
 ## Description
 

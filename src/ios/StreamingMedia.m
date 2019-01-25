@@ -82,6 +82,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 -(void)play:(CDVInvokedUrlCommand *) command type:(NSString *) type {
     NSLog(@"play called");
     callbackId = command.callbackId;
+    videoType = type;
     NSString *mediaUrl  = [command.arguments objectAtIndex:0];
     [self parseOptions:[command.arguments objectAtIndex:1] type:type];
     
@@ -274,7 +275,6 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    
     /* Listen for click on the "Done" button
      
      // Deprecated.. AVPlayerController doesn't offer a "Done" listener... thanks apple. We'll listen for an error when playback finishes
@@ -332,6 +332,11 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     {
         NSLog(@"did set player layer to nil");
         [moviePlayer setPlayer: nil];
+    }
+    NSLog(@"%@", videoType);
+    if(moviePlayer && movie && videoType == TYPE_VIDEO)
+    {
+        [moviePlayer.player pause];
     }
 }
 

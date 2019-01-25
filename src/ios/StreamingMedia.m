@@ -219,8 +219,9 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     
     if(@available(iOS 11.0, *)) { [moviePlayer setEntersFullScreenWhenPlaybackBegins:false]; }
     
+    CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
     [moviePlayer.player play];
-    moviePlayer.view.frame = CGRectMake(0, 60, self.webView.bounds.size.width, self.webView.bounds.size.width*9/16);
+    moviePlayer.view.frame = CGRectMake(0, 44+statusRect.size.height, self.webView.bounds.size.width, self.webView.bounds.size.width*9/16);
     [self.viewController.view addSubview:moviePlayer.view];
 
     // present modally so we get a close button

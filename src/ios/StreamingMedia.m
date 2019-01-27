@@ -348,6 +348,11 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
         NSLog(@"did reinstate playerlayer");
         [moviePlayer setPlayer:movie];
     }
+    NSLog(@"%@", videoType);
+    if(moviePlayer && movie && videoType == TYPE_VIDEO)
+    {
+        [moviePlayer.player play];
+    }
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
